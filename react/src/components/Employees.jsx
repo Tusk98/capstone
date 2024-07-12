@@ -6,7 +6,7 @@ import CardContent from '@mui/material/CardContent';
 
 function Employees() {
     let [employeeList, setEmployeeList] = useState([]);
-    //let navigate = useNavigate();
+    let navigate = useNavigate();
 
     let data_url = "http://localhost:3000/employees";
 
@@ -20,22 +20,21 @@ function Employees() {
 
     useEffect(fetchEmployees, []);
 
-//   function handleClick(id) {
-//     navigate(`/characters/${id}`);
-//   }
+  function handleClick(id) {
+    navigate(`/employees/${id}`);
+  }
 
   return (
-    <>
-      <section id="employeeList">
+    <section id="employeeList">
       <div className="card-container" style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
         {employeeList.map((employee) => (
           <Card key={employee._id} variant="outlined">
-            <div key={employee._id}>{employee.Name}</div>
+            <div key={employee._id} onClick={() => handleClick(employee.Employee_id)}>{employee.Name}
+            </div>
             </Card>
         ))}
         </div>
       </section>
-    </>
   );
 }
 export default Employees;

@@ -13,6 +13,9 @@ const PORT = 3000;
 
 
 app.get('/employees', async (_req, res) => {
+    // to deal with cors access error
+    res.setHeader('Access-Control-Allow-Origin', '*'); /* @dev First, read about security */
+    res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
     try {
         const client = await MongoClient.connect(url);
         const db = client.db(dbName);
@@ -22,6 +25,23 @@ app.get('/employees', async (_req, res) => {
     } catch (err) {
         console.error("Error:", err);
         res.status(500).send("Error, /employees not reached!");
+    }
+});
+
+app.get('/employees/:employeeId', async (_req, res) => {
+    // to deal with cors access error
+    res.setHeader('Access-Control-Allow-Origin', '*'); /* @dev First, read about security */
+    res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
+    try {
+        const  employeeId = parseInt(_req.params.employeeId)
+        const client = await MongoClient.connect(url);
+        const db = client.db(dbName);
+        const collection = db.collection(collectionName);
+        const employees = await collection.find({Employee_id: employeeId}).toArray();
+        res.json(employees);
+    } catch (err) {
+        console.error("Error:", err);
+        res.status(500).send("Error, /employees/:employeeId not reached!");
     }
 });
 

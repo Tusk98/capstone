@@ -10,25 +10,24 @@ import {
 } from "react-router-dom";
 import LoginForm from "./components/LoginForm";
 import Employees from './components/Employees';
+import EmployeeCard from './components/EmployeeCard';
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <>
-   
-      <Router>
+    <Router>
 
       <div>
         <h1>Enterprise Directory </h1>
         <hr></hr>
        </div>
           <Routes>
-            <Route path="/Login" element={<LoginForm />} />
-            <Route path="/Employees" element={<Employees />} />
+            <Route path="/login" element={<LoginForm />} />
+            <Route path="/employees" element={<Employees />} />
+            <Route path="/employees/:id" element = {<EmployeeCard />} />
           </Routes>
       </Router>
-    </>
   )
 }
 
