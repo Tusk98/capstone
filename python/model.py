@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS  # Import CORS
 import pandas as pd 
 import pickle 
+import random
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
@@ -15,7 +16,8 @@ def predict_salary(job_role, work_location):
     df_input_dummy = df_input_dummy.reindex(columns=model_loaded.feature_names_in_, fill_value=0)
 
     model_prediction = model_loaded.predict(df_input_dummy)
-    return model_prediction[0]
+    #return model_prediction[0]
+    return random.gauss(100000, 15000)
 
 @app.route('/predict', methods=['POST'])
 def predict():
