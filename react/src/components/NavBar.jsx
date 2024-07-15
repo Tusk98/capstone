@@ -21,6 +21,7 @@ function NavBar() {
             <Nav.Link onClick={() =>  navigate(`/employees`, {state:{id:userId}})}>Employees</Nav.Link>
             <Nav.Link href="/predictor">Salary Predictor</Nav.Link>
             <Nav.Link href="/login">Log out</Nav.Link>
+            <Nav.Link href="/search">Search Employee</Nav.Link>
           </Nav>
         <Navbar.Collapse className="justify-content-end">
           <Navbar.Text>
