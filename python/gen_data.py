@@ -3,7 +3,7 @@ import json
 
 # Searchable Enterprise Directory 
 
-names = ["One", "Two", "Three", "Four", "Five"]
+names = ["James", "Robert", "Michael", "Mary", "Patricia", "Gennifer"]
 job_titles = ["Software", "Hardware", "Frontware", "Backware", "Middleware"]
 work_locale = ["WFH", "Toronto", "North Pole", "South Pole"]
 NUM_ROWS = 1000 
