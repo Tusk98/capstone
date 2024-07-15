@@ -11,7 +11,7 @@ function Predictor() {
         event.preventDefault();
         
         try {
-            const response = await fetch('http://localhost:3000/predict', {
+            const response = await fetch('http://localhost:5000/predict', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -53,7 +53,6 @@ function Predictor() {
                 </div>
                 <button type="submit" className="btn btn-primary">Salary Predict</button>
             </form>
-            {console.log("AAAAA")}
             {predictedSalary !== null && (
                 <div className="mt-3">
                     <h3>Predicted Salary: ${predictedSalary.toFixed(2)}</h3>

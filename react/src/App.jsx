@@ -16,6 +16,7 @@ import LoginForm from "./components/LoginForm";
 import Employees from './components/Employees';
 import EmployeeCard from './components/EmployeeCard';
 import RequireAuth from './components/RequireAuth';
+import Predictor from './components/Predictor';
 import { AuthProvider } from './hooks/AuthContext';
 import NavBar from './components/NavBar';
 
@@ -34,6 +35,7 @@ function App() {
 
             <Route path="/employees" element={<RequireAuth><Employees /></RequireAuth>} />
             <Route path="/employees/:id" element={<EmployeeCard />} />
+            <Route path="/predictor" element = {<Predictor />} />
           </Routes>
         </AuthProvider>
       </Router></>
