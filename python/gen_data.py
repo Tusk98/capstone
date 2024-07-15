@@ -6,6 +6,7 @@ import json
 names = ["James", "Robert", "Michael", "Mary", "Patricia", "Gennifer"]
 job_titles = ["Software", "Hardware", "Frontware", "Backware", "Middleware"]
 work_locale = ["WFH", "Toronto", "North Pole", "South Pole"]
+status_roles = ["Employee", "Manager", "HR"]
 NUM_ROWS = 1000 
 
 OUTPUT_FILE = "generated_proj_data.json" 
@@ -18,6 +19,7 @@ def generate_job_data(i):
         "Name": random.choice(names), 
         "Phone_number": random.randint(1111111111, 9999999999), 
         "Job_role": random.choice(job_titles), 
+        "Status": random.choice(status_roles), 
         "Work_location": random.choice(work_locale), 
         "Salary": int(random.gauss(100000, 15000))
     }
