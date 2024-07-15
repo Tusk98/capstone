@@ -1,40 +1,33 @@
-import pandas as pd
-from sklearn.preprocessing import LabelEncoder
+# %%
+import pandas as pd 
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score
-import joblib
+import pickle 
+import os
 
-# Load the data
-df = pd.read_json("generated_proj_data.json")
+# Load the encoders and model
+model_loaded = pickle.load(open('./python/trained_model.pkl', 'rb'))
 
-# Initialize the LabelEncoders
-job_role_encoder = LabelEncoder()
-work_location_encoder = LabelEncoder()
+def predict_salary(job_role, work_location):     
+    # Create a DataFrame for input
+    df_input_data = pd.DataFrame({'job_role': [job_role], 'work_location': [work_location]})
 
-# Fit and transform the data
-df['Job_role_encoded'] = job_role_encoder.fit_transform(df['Job_role'])
-df['Work_location_encoded'] = work_location_encoder.fit_transform(df['Work_location'])
+    df_input_dummy = pd.get_dummies(df_input_data, columns=['job_role', 'work_location'], drop_first=True)
+   
+    df_input_dummy = df_input_dummy.reindex(columns=model_loaded.feature_names_in_, fill_value=0)
 
-# Save the encoders
-joblib.dump(job_role_encoder, 'job_role_encoder.joblib')
-joblib.dump(work_location_encoder, 'work_location_encoder.joblib')
+    # Make salary prediction
+    model_prediction = model_loaded.predict(df_input_dummy)
+    return model_prediction[0]
 
-# Define features and target
-X = df[['Job_role_encoded', 'Work_location_encoded']]
-y = df['Salary']
+print("Enter your job role Software, Hardware, Frontware, Backware, Middleware")
+job_role = input()
+print("Enter your job location (WFH, Toronto, North Pole, South Pol")
+work_location = input()
 
-# Split the data
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+predicted_salary = predict_salary(job_role, work_location)
+print(f'The salary for a {job_role} in {work_location} is predicted to be ${predicted_salary:.2f}')
 
-# Train the model
-model = LinearRegression()
-model.fit(X_train, y_train)
 
-# Save the model
-joblib.dump(model, 'linear_regression_model.joblib')
 
-# Evaluate the model
-y_pred = model.predict(X_test)
-mse = mean_squared_error(y_test, y_pred)
-r2 = r2_score(y_test, y_pred)
