@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 
@@ -7,6 +7,8 @@ import CardContent from '@mui/material/CardContent';
 function Employees() {
     let [employeeList, setEmployeeList] = useState([]);
     let navigate = useNavigate();
+    const location = useLocation();
+    let userId = location.state.id;
 
     let data_url = "http://localhost:3000/employees";
 
@@ -21,7 +23,7 @@ function Employees() {
     useEffect(fetchEmployees, []);
 
   function handleClick(id) {
-    navigate(`/employees/${id}`);
+    navigate(`/employees/${id}`, {state:{id:userId}});
   }
 
   return (

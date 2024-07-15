@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../hooks/AuthContext';
 
 function LoginForm() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    //const { login } = useAuth();
+    const { login } = useAuth();
+    const {user} = useAuth();
     const navigate = useNavigate();
 
     const handleLogin = async (event) => {
         event.preventDefault();
-        //await login(username, password);
+        await login(username, password);
         console.log(username, password);
-        //navigate('/add');
+        navigate('/employees', {state:{id:username}});
     };
 
     return (

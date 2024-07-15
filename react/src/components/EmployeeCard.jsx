@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 
 function EmployeeCard(){
 
     let [employee, setEmployee] = useState([]);
+    const location = useLocation();
+    let userId = location.state.id;
 
     let navigate = useNavigate();
     let params = useParams();
@@ -13,6 +15,7 @@ function EmployeeCard(){
       let fetchedEmployee = await fetchEmployee(params.id);
       
       console.log("employee:", fetchedEmployee);
+      console.log("logged in as employee:", userId);
       setEmployee(fetchedEmployee[0]);
     }
   
