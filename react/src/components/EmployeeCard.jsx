@@ -5,6 +5,7 @@ import NavBar from "./NavBar";
 function EmployeeCard(){
 
     let [employee, setEmployee] = useState([]);
+    let [managed, setManaged] = useState([]);
     const location = useLocation();
     let userId = location.state.id;
 
@@ -14,16 +15,32 @@ function EmployeeCard(){
 
     async function getEmployee() {
       let fetchedEmployee = await fetchEmployee(params.id);
+      let managedEmp; 
       
       console.log("employee:", fetchedEmployee);
       console.log("logged in as employee:", userId);
       setEmployee(fetchedEmployee[0]);
+
+      if (fetchedEmployee[0].Managed) {
+        console.log("MANAGED:", fetchedEmployee[0].Managed);
+        const managedEmp = await fetchManaged(fetchedEmployee[0].Managed);
+        setManaged(managedEmp[0]);
+      } else {
+        console.log("Has no managed employees");
+      }
     }
-  
-    async function fetchEmployee() {
-      let result = await fetch(`${url}/employees/${params.id}`);
+
+    const fetchManaged = async (managedId) => {
+      const result = await fetch(`${url}/employees/${managedId}`);
+      console.log(`fetchManaged ${managedId}`);
       return result.json();
-    }
+    };
+  
+    const fetchEmployee = async (employeeId) => {
+      const result = await fetch(`${url}/employees/${employeeId}`);
+      console.log(`fetchEmployee ${employeeId}`);
+      return result.json();
+    };
 
     useEffect(() => getEmployee, []);
 
@@ -39,6 +56,12 @@ function EmployeeCard(){
             <div className="card-text">Job Role:: {employee.Job_role}</div>
             <div className="card-text">Work Location: {employee.Work_location}</div>
             <div className="card-text">Salary: {employee.Salary}</div>
+          </div>
+
+          <div className="card-body">
+            <h5 className="card-title">Managed Details</h5>
+            <div className="card-text">Name: {managed.Name}</div>
+            <div className="card-text">Salary: {managed.Salary}</div>
           </div>
 
 
