@@ -21,9 +21,9 @@ def predict_salary(job_role, work_location):
     model_prediction = model_loaded.predict(df_input_dummy)
     return model_prediction[0]
 
-print("Enter your job role Software, Hardware, Frontware, Backware, Middleware")
+print("Enter your job role (Software, Hardware, Frontware, Backware, Middleware):")
 job_role = input()
-print("Enter your job location (WFH, Toronto, North Pole, South Pol")
+print("Enter your job location (WFH, Toronto, North Pole, South Pole):")
 work_location = input()
 
 predicted_salary = predict_salary(job_role, work_location)
