@@ -15,7 +15,6 @@ function EmployeeCard(){
 
     async function getEmployee() {
       let fetchedEmployee = await fetchEmployee(params.id);
-      let managedEmp; 
       
       console.log("employee:", fetchedEmployee);
       console.log("logged in as employee:", userId);
