@@ -1,4 +1,8 @@
 import { useState } from 'react'
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -13,26 +17,26 @@ import Employees from './components/Employees';
 import EmployeeCard from './components/EmployeeCard';
 import RequireAuth from './components/RequireAuth';
 import { AuthProvider } from './hooks/AuthContext';
+import NavBar from './components/NavBar';
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <Router>
-
-      <div>
-        <h1>Enterprise Directory </h1>
-        <hr></hr>
-       </div>
-       <AuthProvider>
+    <>
+   <Router>
+          <h1>Enterprise Directory </h1>
+          <hr></hr>
+        
+        <AuthProvider>
           <Routes>
             <Route path="/login" element={<LoginForm />} />
-        
+
             <Route path="/employees" element={<RequireAuth><Employees /></RequireAuth>} />
-            <Route path="/employees/:id" element = {<EmployeeCard />} />
+            <Route path="/employees/:id" element={<EmployeeCard />} />
           </Routes>
-          </AuthProvider>
-      </Router>
+        </AuthProvider>
+      </Router></>
   )
 }
 
