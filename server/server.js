@@ -2,6 +2,7 @@ import express from 'express';
 import { MongoClient, ObjectId } from 'mongodb';
 import dotenv from 'dotenv';
 import cors from 'cors';
+const { spawn } = require('child_process');
 
 dotenv.config();
 const url = process.env.MONGO_DB_URL;
@@ -31,6 +32,24 @@ app.post('/login', async (req, res) => {
         console.error(err);
         res.status(500).json({ message: 'Internal server error' });
     }
+});
+
+app.post('/predict', (req, res) => {
+    const { job_role, work_location } = req.body;
+
+    const pythonProcess = spawn('python', ['predict.py']);
+
+    pythonProcess.stdin.write(JSON.stringify({ job_role, work_location }));
+    pythonProcess.stdin.end();
+
+    pythonProcess.stdout.on('data', (data) => {
+        const result = JSON.parse(data.toString());
+        res.json(result);
+    });
+
+    pythonProcess.stderr.on('data', (data) => {
+        console.error(`stderr: ${data}`);
+    });
 });
 
 app.get('/employees', async (_req, res) => {
