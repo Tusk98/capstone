@@ -13,6 +13,8 @@ OUTPUT_FILE = "generated_proj_data.json"
 def generate_job_data(i): 
     return {
         "Employee_id": i+1,
+        "Manager_id": i+1, 
+        "Managed": i+2, 
         "Name": random.choice(names), 
         "Phone_number": random.randint(1111111111, 9999999999), 
         "Job_role": random.choice(job_titles), 
