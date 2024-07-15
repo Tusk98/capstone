@@ -14,14 +14,12 @@ function NavBar() {
         userId = location.state.id;
     }
     
-    
-
     return (
         <Navbar bg="secondary" data-bs-theme="light">
       <Container>
       <Nav className="me-auto">
             <Nav.Link onClick={() =>  navigate(`/employees`, {state:{id:userId}})}>Employees</Nav.Link>
-            <Nav.Link href="/features">Salary Predictor</Nav.Link>
+            <Nav.Link href="/predictor">Salary Predictor</Nav.Link>
             <Nav.Link href="/login">Log out</Nav.Link>
           </Nav>
         <Navbar.Collapse className="justify-content-end">
