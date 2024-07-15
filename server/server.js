@@ -39,9 +39,9 @@ app.post('/login', async (req, res) => {
         const client = await MongoClient.connect(url);
         const db = client.db(dbName);
         const collection = db.collection(collectionName);
-        const employees = await collection.find({Employee_id: employeeId}).toArray();
+        const employee = await collection.findOne({Employee_id: employeeId});
        // res.json(employees);
-        if (password == "aaa") {
+        if (employee && password == "aaa") {
             res.status(200).json({ id: employeeId });
         } else {
             res.status(401).json({ message: 'Authentication failed' });
