@@ -6,6 +6,7 @@ function EmployeeCard(){
 
     let [employee, setEmployee] = useState([]);
     let [managed, setManaged] = useState([]);
+    let [loggedUser, setLoggedUser] = useState([]);
     const location = useLocation();
     let userId = location.state.id;
 
@@ -15,11 +16,13 @@ function EmployeeCard(){
 
     async function getEmployee() {
       let fetchedEmployee = await fetchEmployee(params.id);
+      let loggedEmployee = await fetchEmployee(userId);
       let managedEmp; 
       
       console.log("employee:", fetchedEmployee);
       console.log("logged in as employee:", userId);
       setEmployee(fetchedEmployee[0]);
+      setLoggedUser(loggedEmployee[0]);
 
       if (fetchedEmployee[0].Managed) {
         console.log("MANAGED:", fetchedEmployee[0].Managed);
@@ -47,6 +50,7 @@ function EmployeeCard(){
     return (
       <><div>
         <NavBar></NavBar>
+        <div>Welcome {loggedUser.Name}! Your role is {loggedUser.Status}</div>
       </div><div className="card card-background" style={{ flex: '1', minWidth: '300px' }}>
           <div className="card-body">
             <h5 className="card-title">Employee Details</h5>
@@ -55,14 +59,18 @@ function EmployeeCard(){
             <div className="card-text">Phone Number: {employee.Phone_number}</div>
             <div className="card-text">Job Role:: {employee.Job_role}</div>
             <div className="card-text">Work Location: {employee.Work_location}</div>
-            <div className="card-text">Salary: {employee.Salary}</div>
+            <div className="card-text">Salary: 
+              {(loggedUser.Status=="HR" || loggedUser.Employee_id == employee.Employee_id
+                || (loggedUser.Status=="Manager" && loggedUser.Managed == employee.Employee_id)
+              ) ?
+              employee.Salary : "You are not authorized to view this salary"}</div>
           </div>
 
-          <div className="card-body">
+          {/* <div className="card-body">
             <h5 className="card-title">Managed Details</h5>
             <div className="card-text">Name: {managed.Name}</div>
             <div className="card-text">Salary: {managed.Salary}</div>
-          </div>
+          </div> */}
 
 
         </div></>
