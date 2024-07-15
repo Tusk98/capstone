@@ -23,8 +23,8 @@ function NavBar() {
             <Nav.Link href="/login">Log out</Nav.Link>
           </Nav>
         <Navbar.Collapse className="justify-content-end">
-          <Navbar.Text>
-            Signed in as: {userId}
+          <Navbar.Text  onClick={() =>  navigate(`/employees/${userId}`, {state:{id:userId}})}>
+            Signed in as: EmployeeId {userId}
           </Navbar.Text>
         </Navbar.Collapse>
       </Container>
