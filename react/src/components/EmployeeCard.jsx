@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
+import NavBar from "./NavBar";
 
 function EmployeeCard(){
 
@@ -44,25 +45,27 @@ function EmployeeCard(){
     useEffect(() => getEmployee, []);
 
     return (
-        <div className="card card-background" style={{ flex: '1', minWidth: '300px' }}>
-            <div className="card-body">
-                <h5 className="card-title">Employee Details</h5>
-                <div className="card-text">Name: {employee.Name}</div>
-                <div className="card-text">Employee ID: {employee.Employee_id}</div>
-                <div className="card-text">Phone Number: {employee.Phone_number}</div>
-                <div className="card-text">Job Role:: {employee.Job_role}</div>
-                <div className="card-text">Work Location: {employee.Work_location}</div>
-                <div className="card-text">Salary: {employee.Salary}</div>
-            </div>
+      <><div>
+        <NavBar></NavBar>
+      </div><div className="card card-background" style={{ flex: '1', minWidth: '300px' }}>
+          <div className="card-body">
+            <h5 className="card-title">Employee Details</h5>
+            <div className="card-text">Name: {employee.Name}</div>
+            <div className="card-text">Employee ID: {employee.Employee_id}</div>
+            <div className="card-text">Phone Number: {employee.Phone_number}</div>
+            <div className="card-text">Job Role:: {employee.Job_role}</div>
+            <div className="card-text">Work Location: {employee.Work_location}</div>
+            <div className="card-text">Salary: {employee.Salary}</div>
+          </div>
 
-            <div className="card-body">
-                <h5 className="card-title">Managed Details</h5>
-                <div className="card-text">Name: {managed.Name}</div>
-                <div className="card-text">Salary: {managed.Salary}</div>
-            </div>
-            
-            
-        </div>
+          <div className="card-body">
+            <h5 className="card-title">Managed Details</h5>
+            <div className="card-text">Name: {managed.Name}</div>
+            <div className="card-text">Salary: {managed.Salary}</div>
+          </div>
+
+
+        </div></>
     );
 
 }

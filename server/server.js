@@ -23,7 +23,7 @@ app.post('/login', async (req, res) => {
         const collection = db.collection(collectionName);
         const employees = await collection.find({Employee_id: employeeId}).toArray();
        // res.json(employees);
-        if (password) {
+        if (password == "aaa") {
             res.status(200).json({ id: employeeId });
         } else {
             res.status(401).json({ message: 'Authentication failed' });

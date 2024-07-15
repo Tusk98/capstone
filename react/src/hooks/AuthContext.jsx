@@ -24,6 +24,7 @@ export const AuthProvider = ({ children }) => {
                     uid: data.id // Storing the uid returned from the server
                 });
             } else {
+                alert("Incorrect login details.")
                 throw new Error(data.message || 'Login failed');
             }
         } catch (error) {

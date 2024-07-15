@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
+import NavBar from "./NavBar";
 
 
 function Employees() {
@@ -28,6 +29,7 @@ function Employees() {
 
   return (
     <section id="employeeList">
+        <NavBar></NavBar>
       <div className="card-container" style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
         {employeeList.map((employee) => (
           <Card key={employee._id} variant="outlined">
