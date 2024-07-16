@@ -37,7 +37,7 @@ function App() {
             <Route path="/employees" element={<RequireAuth><Employees /></RequireAuth>} />
             <Route path="/employees/:id" element={<EmployeeCard />} />
             <Route path="/predictor" element = {<Predictor />} />
-            <Route path="/search" element={<Search />} />
+            <Route path="/search" element={<RequireAuth><Search /></RequireAuth>} />
           </Routes>
         </AuthProvider>
       </Router></>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import NavBar from './NavBar';
 
 function Predictor() {
     const [jobRole, setJobRole] = useState('');
@@ -28,6 +29,7 @@ function Predictor() {
 
     return (
         <div className="container">
+             <NavBar></NavBar>
             <form onSubmit={handlePredict} className="mt-5">
                 <div className="form-group">
                     <label htmlFor="jobRole">Job Role</label>

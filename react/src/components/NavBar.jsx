@@ -19,9 +19,9 @@ function NavBar() {
       <Container>
       <Nav className="me-auto">
             <Nav.Link onClick={() =>  navigate(`/employees`, {state:{id:userId}})}>Employees</Nav.Link>
-            <Nav.Link href="/predictor">Salary Predictor</Nav.Link>
+            <Nav.Link onClick={() =>  navigate(`/predictor`, {state:{id:userId}})}>Salary Predictor</Nav.Link>
             <Nav.Link href="/login">Log out</Nav.Link>
-            <Nav.Link href="/search">Search Employee</Nav.Link>
+            <Nav.Link onClick={() =>  navigate(`/search`, {state:{id:userId}})}>Search Employee</Nav.Link>
           </Nav>
         <Navbar.Collapse className="justify-content-end">
           <Navbar.Text  onClick={() =>  navigate(`/employees/${userId}`, {state:{id:userId}})}>
